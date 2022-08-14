@@ -13,7 +13,7 @@ export const loader: LoaderFunction = async () => {
   return { notes };
 };
 
-export default function OrgNameLayout() {
+export default function Problem() {
   const { notes } = useLoaderData<LoaderData>();
 
   return (
@@ -23,16 +23,10 @@ export default function OrgNameLayout() {
           key={note.id}
           className="p flex flex-auto flex-col p-4 sm:p-6 lg:p-8"
         >
-          <h2 className="text-2xl font-bold ">{note.title}</h2>
+          <h2 className="text-2xl font-bold">{note.title}</h2>
           <ul className="text-lg">
-            {/* <li>Created at: {format(note.createdAt, "yyyy-MM-dd")}</li> */}
-            {/* <li>Updated at: {format(note.updatedAt, "yyyy-MM-dd")}</li> */}
-            <li>
-              Created at: {format(new Date(note.createdAt), "yyyy-MM-dd")}
-            </li>
-            <li>
-              Updated at: {format(new Date(note.updatedAt), "yyyy-MM-dd")}
-            </li>
+            <li>Created at: {format(note.createdAt, "yyyy-MM-dd")}</li>
+            <li>Updated at: {format(note.updatedAt, "yyyy-MM-dd")}</li>
             <li>Body: {note.body}</li>
           </ul>
         </div>
