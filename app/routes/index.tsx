@@ -1,3 +1,5 @@
+import { Link } from "@remix-run/react";
+
 export default function Index() {
   return (
     <main className="relative min-h-screen bg-white sm:flex sm:items-center sm:justify-center">
@@ -13,9 +15,12 @@ export default function Index() {
             </div>
             <div className="relative space-y-32 px-4 pt-16 pb-8 sm:px-6 sm:pt-24 sm:pb-14 lg:px-8 lg:pb-20 lg:pt-32">
               <h1 className="pt-96 text-center text-3xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
-                <span className="block uppercase text-red-400 drop-shadow-md">
+                <Link
+                  to="problem"
+                  className="block uppercase text-red-400 underline drop-shadow-md"
+                >
                   Lost in translation
-                </span>
+                </Link>
               </h1>
               <span />
             </div>
