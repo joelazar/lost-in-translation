@@ -13,7 +13,7 @@ export const loader: LoaderFunction = async () => {
   return { notes };
 };
 
-export default function OrgNameLayout() {
+export default function Problem() {
   const { notes } = useLoaderData<LoaderData>();
 
   return (
@@ -27,6 +27,7 @@ export default function OrgNameLayout() {
           <ul className="text-lg">
             {/* <li>Created at: {format(note.createdAt, "yyyy-MM-dd")}</li> */}
             {/* <li>Updated at: {format(note.updatedAt, "yyyy-MM-dd")}</li> */}
+            {/* stupid solution */}
             <li>
               Created at: {format(new Date(note.createdAt), "yyyy-MM-dd")}
             </li>
