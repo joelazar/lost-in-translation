@@ -1,6 +1,6 @@
-import { useLoaderData } from "@remix-run/react";
 import type { LoaderArgs } from "@remix-run/server-runtime";
 import format from "date-fns/format";
+import { typedjson, useTypedLoaderData } from "remix-typedjson";
 import { prisma } from "~/db.server";
 
 /*
@@ -18,12 +18,13 @@ export const loader: LoaderFunction = async () => {
 
 export const loader = async (args: LoaderArgs) => {
   const notes = await prisma.note.findMany({});
-  return { notes };
+  return typedjson({ notes });
 };
 
 export default function Problem() {
   /* const { notes } = useLoaderData<LoaderData>(); */
-  const { notes } = useLoaderData<typeof loader>();
+  /* const { notes } = useLoaderData<typeof loader>(); */
+  const { notes } = useTypedLoaderData<typeof loader>();
 
   return (
     <>
