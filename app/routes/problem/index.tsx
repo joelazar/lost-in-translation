@@ -1,5 +1,5 @@
+import { useCatch } from "@remix-run/react";
 import type { LoaderArgs } from "@remix-run/server-runtime";
-import format from "date-fns/format";
 import { typedjson, useTypedLoaderData } from "remix-typedjson";
 import { prisma } from "~/db.server";
 
@@ -16,7 +16,7 @@ export const loader: LoaderFunction = async () => {
 };
 */
 
-export const loader = async (args: LoaderArgs) => {
+export const loader = async (_: LoaderArgs) => {
   const notes = await prisma.note.findMany({});
   return typedjson({ notes });
 };
@@ -35,19 +35,41 @@ export default function Problem() {
         >
           <h2 className="text-2xl font-bold ">{note.title}</h2>
           <ul className="text-lg">
-            <li>Created at: {format(note.createdAt, "yyyy-MM-dd")}</li>
-            <li>Updated at: {format(note.updatedAt, "yyyy-MM-dd")}</li>
-            {/* stupid solution */}
-            {/* <li> */}
-            {/*   Created at: {format(new Date(note.createdAt), "yyyy-MM-dd")} */}
-            {/* </li> */}
-            {/* <li> */}
-            {/*   Updated at: {format(new Date(note.updatedAt), "yyyy-MM-dd")} */}
-            {/* </li> */}
+            <li>
+              Created at: {Intl.DateTimeFormat("en-US").format(note.createdAt)}
+            </li>
+            <li>
+              Updated at: {Intl.DateTimeFormat("en-US").format(note.updatedAt)}
+            </li>
             <li>Body: {note.body}</li>
           </ul>
         </div>
       ))}
     </>
+  );
+}
+
+export function CatchBoundary() {
+  const caught = useCatch();
+
+  return (
+    <div className="bg-yellow-100">
+      <h1>Caught</h1>
+      <p>Status: {caught.status}</p>
+      <pre>
+        <code>{JSON.stringify(caught.data, null, 2)}</code>
+      </pre>
+    </div>
+  );
+}
+
+export function ErrorBoundary({ error }: { error: Error }) {
+  return (
+    <div className="bg-red-100">
+      <h1>My error boundary</h1>
+      <p>{error.message}</p>
+      <p>The stack trace is:</p>
+      <pre>{error.stack}</pre>
+    </div>
   );
 }
