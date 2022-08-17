@@ -1,6 +1,6 @@
 # Lost in translation
 
-
+You can find the meetup presentation [here](./meetup.md). I used [slides](https://github.com/maaslalani/slides) presentation tool.
 
 ## Quickstart
 
