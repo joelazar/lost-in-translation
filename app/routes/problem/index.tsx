@@ -24,23 +24,21 @@ export default function Problem() {
         >
           <h2 className="text-2xl font-bold ">{note.title}</h2>
           <ul className="text-lg">
-            {/* <li>Created at: {format(note.createdAt, "yyyy-MM-dd")}</li> */}
-            {/* <li>Updated at: {format(note.updatedAt, "yyyy-MM-dd")}</li> */}
-            {/* stupid solution */}
-            <li>
-              Created at: {format(new Date(note.createdAt), "yyyy-MM-dd")}
-            </li>
-            <li>
-              Updated at: {format(new Date(note.updatedAt), "yyyy-MM-dd")}
-            </li>
-            <li>Created at: {format(note.createdAt, "yyyy-MM-dd")}</li>
-            <li>Updated at: {format(note.updatedAt, "yyyy-MM-dd")}</li>
             <li>
               Created at: {Intl.DateTimeFormat("en-US").format(note.createdAt)}
             </li>
             <li>
               Updated at: {Intl.DateTimeFormat("en-US").format(note.updatedAt)}
             </li>
+            {/* stupid solution */}
+            {/* <li> */}
+            {/*   Created at: */}
+            {/*   {Intl.DateTimeFormat("en-US").format(new Date(note.createdAt))} */}
+            {/* </li> */}
+            {/* <li> */}
+            {/*   Updated at: */}
+            {/*   {Intl.DateTimeFormat("en-US").format(new Date(note.updatedAt))} */}
+            {/* </li> */}
             <li>Body: {note.body}</li>
           </ul>
         </div>
