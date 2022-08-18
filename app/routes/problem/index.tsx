@@ -1,10 +1,10 @@
-import { useCatch } from "@remix-run/react";
-import type { LoaderArgs } from "@remix-run/server-runtime";
-import { typedjson, useTypedLoaderData } from "remix-typedjson";
-import { prisma } from "~/db.server";
-
-/*
 import type { Note } from "@prisma/client";
+import { useCatch, useLoaderData } from "@remix-run/react";
+import type { LoaderFunction } from "@remix-run/server-runtime";
+import { json } from "@remix-run/server-runtime";
+import { deserialize, serialize } from "superjson";
+import type { SuperJSONResult } from "superjson/dist/types";
+import { prisma } from "~/db.server";
 
 type LoaderData = {
   notes: Note[];
@@ -12,19 +12,13 @@ type LoaderData = {
 
 export const loader: LoaderFunction = async () => {
   const notes = await prisma.note.findMany({});
-  return { notes };
-};
-*/
-
-export const loader = async (_: LoaderArgs) => {
-  const notes = await prisma.note.findMany({});
-  return typedjson({ notes });
+  return json(serialize({ notes }));
 };
 
 export default function Problem() {
-  /* const { notes } = useLoaderData<LoaderData>(); */
-  /* const { notes } = useLoaderData<typeof loader>(); */
-  const { notes } = useTypedLoaderData<typeof loader>();
+  const { notes } = deserialize(
+    useLoaderData() as SuperJSONResult
+  ) as LoaderData;
 
   return (
     <>
