@@ -1,6 +1,7 @@
 import type { Note } from "@prisma/client";
 import { useCatch, useLoaderData } from "@remix-run/react";
 import type { LoaderFunction } from "@remix-run/server-runtime";
+import { json } from "@remix-run/server-runtime";
 import { prisma } from "~/db.server";
 
 type LoaderData = {
@@ -9,7 +10,7 @@ type LoaderData = {
 
 export const loader: LoaderFunction = async () => {
   const notes = await prisma.note.findMany({});
-  return { notes };
+  return json({ notes });
 };
 
 export default function Problem() {
