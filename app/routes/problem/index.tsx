@@ -1,20 +1,20 @@
-import type { Note } from "@prisma/client";
+/* import type { Note } from "@prisma/client"; */
 import { useCatch, useLoaderData } from "@remix-run/react";
-import type { LoaderFunction } from "@remix-run/server-runtime";
+import type { LoaderArgs } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 import { prisma } from "~/db.server";
 
-type LoaderData = {
-  notes: Note[];
-};
+/* type LoaderData = { */
+/*   notes: Note[]; */
+/* }; */
 
-export const loader: LoaderFunction = async () => {
+export const loader = async (_: LoaderArgs) => {
   const notes = await prisma.note.findMany({});
   return json({ notes });
 };
 
 export default function Problem() {
-  const { notes } = useLoaderData<LoaderData>();
+  const { notes } = useLoaderData<typeof loader>();
 
   return (
     <>
